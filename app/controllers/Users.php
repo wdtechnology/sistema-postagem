@@ -120,10 +120,28 @@
                     $data['password_err'] = 'A senha deve conter mais de 6 caracteres';
                 }
 
+                //Check for user/email
+                if($this->userModel->findUserByEmail($data['email'])){
+                    //User found
+
+                } else {
+                    // User not foud
+                    $data['email_err'] = 'Email não cadastro no sistema';
+                }
+
                  // Make sure errors are empty
                  if(empty($data['email_err']) &&  empty($data['password_err'])) {
                      //Validated
-                     die('SUCESSO');
+
+                     //Check and set logged in user
+                     $loggerdInUser = $this->userModel->login($data['email'], $data['password']);
+                     if($loggerdInUser){
+                        // Create session
+                        die('Sucesso!');
+                     } else {
+                        $data['password_err'] = 'Usuário ou senha incorreta';
+                        $this->view('users/login', $data);
+                     }
                  } else {
                      // Load view with errors
                      $this->view('users/login', $data);
