@@ -56,7 +56,7 @@
                 }
             }
 
-            $this->stmt->bindValu($param, $value, $type);
+            $this->stmt->bindValue($param, $value, $type);
         } 
 
         // Execute the prepared statement

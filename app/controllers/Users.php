@@ -2,7 +2,7 @@
     class Users extends Controller {
 
         public function __construct(){
-
+            $this->userModel = $this->model('User');
         } 
 
         public function register(){
@@ -28,6 +28,11 @@
                 // Validate email
                 if(empty($data['email'])){
                     $data['email_err'] = 'Campo email não pode ser vazio!';
+                } else {
+                    //Check email
+                    if($this->userModel->findUserByEmail($data['email'])){
+                        $data['email_err'] = 'Entre com outro email, esse encontra cadatrado no sistema!';
+                    }
                 }
 
                 // Validate Name
@@ -114,7 +119,7 @@
                      // Load view with errors
                      $this->view('users/login', $data);
                  }
-                 
+
             } else {
                 // Init data
                 $data = [
