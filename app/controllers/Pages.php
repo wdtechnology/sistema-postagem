@@ -6,7 +6,8 @@
         public function index(){
 
             $data = [
-                'title' => 'WellingtonMVC'
+                'title' => 'SharePosts',
+                'description' => 'Sistema minimalista de postagem utilizado '
             ];       
 
             $this->view('pages/index', $data);
@@ -14,7 +15,8 @@
 
         public function about(){
             $data = [
-                'title' => 'About'
+                'title' => 'Sobre',
+                'description' => 'Sistema minimalista de postagem utilizado '
             ];
             $this->view('pages/about', $data);
         }
