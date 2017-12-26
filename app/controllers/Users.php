@@ -65,6 +65,7 @@
                     $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
                     //Register User
                     if($this->userModel->register($data)){
+                        flash('register_success', 'Cadastrado com sucesso!');
                         redirect('users/login');
                     } else {
                         die('Opss! Algo deu errado!');
