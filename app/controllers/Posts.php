@@ -130,4 +130,22 @@
             ];
             $this->view('posts/show', $data);
         }
+
+        public function delete($id){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                // Get existing from model
+                $post = $this->postModel->getPostById($id);   
+                // Check for owner
+                if($post->user_id != $_SESSION['user_id']){
+                    redirect('posts');
+                }
+
+                if($this->postModel->deletePost($id)){
+                    flash('post_message', 'Post apagado');
+                    redirect('posts');
+                }
+            } else {
+                die('Opss! Algo deu errado');
+            }
+        }
     }
